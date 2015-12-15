@@ -5,9 +5,10 @@ var app = angular.module('meanMapApp', ['geolocation'])
   var currentLongitude;
 
 
+
 window.initMap = function initMap() {
 console.log('init map')
-
+//get location for map
   var getLocation = function() {
     var success = function(pos) {
       currentLatitude = pos.coords.latitude;
@@ -18,12 +19,12 @@ console.log('init map')
       navigator.geolocation.getCurrentPosition(success);
   };
   getLocation();
-//console.log(getLocation)
+
 
 //map options
   var mapOptions = {
     zoom: 15,
-    center: {lat: 40.7400361, lng: -73.9897932},
+    center: {lat: 40.7400874, lng: -73.9897743},
     panControl: false,
     panControlOptions: {
       position: google.maps.ControlPosition.BOTTOM_LEFT
