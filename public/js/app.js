@@ -133,7 +133,8 @@ $('#barClick').click(function() {
     $('#bar-info').append(barDiv);
 
     barDiv.append('<h4>' + place.name + '</h4>');
-    //barDiv.append('<img src=' '></img>')
+    barDiv.append('<p>Rating: ' + place.rating + ' | Price Range ' + place.price_level + '</p>')
+    barDiv.append('<h6>Address: ' + place.vicinity + '</h6>');
   }
 
 } //end of init function
