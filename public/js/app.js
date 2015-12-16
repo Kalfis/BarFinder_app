@@ -20,9 +20,9 @@ function initMap() {
         currentLongitude = pos.coords.longitude;
           //console.log(currentLongitude);
 map = new google.maps.Map(document.getElementById('map'), mapOptions(currentLatitude, currentLongitude));
-          console.log('before create marker')
+
         var userPos = {lat: currentLatitude, lng: currentLongitude};
-        console.log(userPos);
+        //console.log(userPos);
         var marker = new google.maps.Marker ({
           position: userPos,
           map: map,
@@ -77,21 +77,21 @@ $('#barClick').click(function() {
       //     console.log(barName);
       //   }
       // })
-      var flatiron = new google.maps.LatLng(40.7400394, -73.9897814);
 
       var map = new google.maps.Map(document.getElementById('map'), {
-        center: flatiron,
+        center: {lat: currentLatitude, lng: currentLongitude},
         zoom: 15,
         scrollwheel: false
       });
-//console.log(map);
+console.log(map);
+      var userPos = {lat: currentLatitude, lng: currentLongitude};
       var request = {
-        location: [currentLatitude, currentLongitude],
+        location: userPos,
         radius: '500',
         types: ['bar'],
         opennow: true
       }
-//console.log(request);
+console.log(request);
       var service = new google.maps.places.PlacesService(map);
       console.log(service);
       service.nearbySearch(request, function(results, status) {
@@ -102,7 +102,8 @@ $('#barClick').click(function() {
             console.log(results[i]);
             marker = new google.maps.Marker({
               map: map,
-              position: place.geometry.location
+              position: place.geometry.location,
+              animation: google.maps.Animation.DROP
             });
           }
         }
