@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- Declares meanMapApp as the starting Angular module -->
-<html class="no-js" ng-app="meanMapApp">
+<html class="no-js" >
 <head>
     <meta charset="utf-8">
     <title>Scotch MEAN Map</title>
@@ -40,7 +40,7 @@
                 <!-- Panel Body -->
                 <div class="panel-body">
 
-
+                    <button type="submit" id="BarSearch" class="btn btn-danger btn-block" ng-disabled="addForm.$invalid">Local Bar Search</button>
                 </div>
             </div>
         </div>
@@ -53,6 +53,6 @@
     </div>
 </div>
 <script src="./js/app.js" charset="utf-8"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACoF4rtuIwZ4GdTY3UBqjY8EUASZ3gdg8&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
 </body>
 </html>
