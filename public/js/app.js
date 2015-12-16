@@ -5,7 +5,11 @@
   var currentLatitude;
   var currentLongitude;
 
-window.initMap = function initMap() {
+// $(function(){
+  //onload code goes here
+
+
+function initMap() {
   console.log('init map')
   //get location for map
     var getLocation = function() {
@@ -16,7 +20,6 @@ window.initMap = function initMap() {
         currentLongitude = pos.coords.longitude;
           //console.log(currentLongitude);
 map = new google.maps.Map(document.getElementById('map'), mapOptions(currentLatitude, currentLongitude));
-barMap = new google.maps.Map(document.getElementById('map'), barSearch(currentLatitude, currentLongitude));
         }
       navigator.geolocation.getCurrentPosition(success);
     };
@@ -42,16 +45,27 @@ barMap = new google.maps.Map(document.getElementById('map'), barSearch(currentLa
 
       };
     }
+$('#barClick').click(function() {
+  console.log('bar clicked')
 
-    var barSearch = function(lat, lng) {
-      // var accessURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="currentLatitude,currentLongitude"&radius=500&type=bar&opennow=true&key=AIzaSyACoF4rtuIwZ4GdTY3UBqjY8EUASZ3gdg8"
-      // $.ajax({
-      //   type: "GET",
-      //   contentType: "application/json",
-      //   url: accessURL,
-      //   datatype: 'jsonp',
-      //   success: return(data)
-      // })
-    }
+      console.log('in bar search')
+      var accessURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+currentLatitude+","+currentLongitude+"&radius=500&type=bar&opennow=true&key=AIzaSyACoF4rtuIwZ4GdTY3UBqjY8EUASZ3gdg8"
+      $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: accessURL,
+        datatype: 'jsonp',
+        success: function (data) {
 
+          $.each(data.results, function (i, val) {
+            barId.push(val.id);
+            barName.push(val.name);
+          });
+
+          console.log(barName);
+        }
+      })
+
+  });
 }
+// });

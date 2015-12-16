@@ -3,6 +3,7 @@ let express = require('express');
 let mongoose = require('mongoose');
 let port = process.env.PORT || 3000;
 let logger = require('morgan');
+let cors = require('cors');
 let bodyParser = require('body-parser');
 let methodOverride = require('method-override');
 var app = express();
