@@ -1,7 +1,7 @@
 //angular.module('meanMapApp', ['geolocation'])
 'use strict'
   var map;
-  var barMap;
+
   var currentLatitude;
   var currentLongitude;
 
@@ -20,6 +20,13 @@ function initMap() {
         currentLongitude = pos.coords.longitude;
           //console.log(currentLongitude);
 map = new google.maps.Map(document.getElementById('map'), mapOptions(currentLatitude, currentLongitude));
+        function createMarker(place) {
+          var placeloc = place.geometry.location;
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          })
+        }
         }
       navigator.geolocation.getCurrentPosition(success);
     };
@@ -45,27 +52,59 @@ map = new google.maps.Map(document.getElementById('map'), mapOptions(currentLati
 
       };
     }
+
+
+
 $('#barClick').click(function() {
   console.log('bar clicked')
 
-      console.log('in bar search')
-      var accessURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+currentLatitude+","+currentLongitude+"&radius=500&type=bar&opennow=true&key=AIzaSyACoF4rtuIwZ4GdTY3UBqjY8EUASZ3gdg8"
-      $.ajax({
-        type: "GET",
-        contentType: "application/json",
-        url: accessURL,
-        datatype: 'jsonp',
-        success: function (data) {
+      console.log(currentLatitude);
+      console.log(currentLongitude);
+      // var accessURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+currentLatitude+","+currentLongitude+"&radius=500&type=bar&opennow=true&key=AIzaSyACoF4rtuIwZ4GdTY3UBqjY8EUASZ3gdg8"
+      // $.ajax({
+      //   type: "GET",
+      //   contentType: "application/json",
+      //   url: accessURL,
+      //   datatype: 'jsonp',
+      //   success: function (data) {
+      //
+      //     $.each(data.results, function (i, val) {
+      //       barId.push(val.id);
+      //       barName.push(val.name);
+      //     });
+      //
+      //     console.log(barName);
+      //   }
+      // })
+      var flatiron = new google.maps.LatLng(40.7400394, -73.9897814);
 
-          $.each(data.results, function (i, val) {
-            barId.push(val.id);
-            barName.push(val.name);
-          });
-
-          console.log(barName);
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: flatiron,
+        zoom: 15,
+        scrollwheel: false
+      });
+//console.log(map);
+      var request = {
+        location: [currentLatitude, currentLongitude],
+        radius: '500',
+        types: ['bar'],
+        opennow: true
+      }
+//console.log(request);
+      var service = new google.maps.places.PlacesService(map);
+      console.log(service);
+      service.nearbySearch(request, function(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            var place = results[i];
+            console.log(results[i]);
+            var marker = new google.maps.Marker({
+              map: map,
+              position: place.geometry.location
+            });
+          }
         }
-      })
-
+      });
   });
 }
 // });
