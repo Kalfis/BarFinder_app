@@ -2,6 +2,7 @@
 'use strict'
   var map;
   var marker;
+  //var allMarkers;
   var currentLatitude;
   var currentLongitude;
 
@@ -38,7 +39,7 @@ map = new google.maps.Map(document.getElementById('map'), mapOptions(currentLati
     var mapOptions = function(lat, lng){
 
     return {
-      zoom: 15,
+      zoom: 16,
       center: {lat: lat, lng: lng},
       panControl: false,
       panControlOptions: {
@@ -53,7 +54,6 @@ map = new google.maps.Map(document.getElementById('map'), mapOptions(currentLati
 
       };
     }
-
 
 
 $('#barClick').click(function() {
@@ -80,34 +80,61 @@ $('#barClick').click(function() {
 
       var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: currentLatitude, lng: currentLongitude},
-        zoom: 15,
+        zoom: 16,
         scrollwheel: false
       });
-console.log(map);
+//console.log(map);
       var userPos = {lat: currentLatitude, lng: currentLongitude};
       var request = {
         location: userPos,
-        radius: '500',
+        radius: '400',
         types: ['bar'],
         opennow: true
       }
-console.log(request);
+//console.log(request);
+      var infowindow = new google.maps.InfoWindow();
       var service = new google.maps.places.PlacesService(map);
-      console.log(service);
+      //console.log(service);
       service.nearbySearch(request, function(results, status) {
-        console.log('in nearby search')
+        //console.log('in nearby search')
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
+            //var places = results
             var place = results[i];
-            console.log(results[i]);
+            //console.log(place);
+            barList(place);
+            // $.each(results[i], function() {
             marker = new google.maps.Marker({
               map: map,
               position: place.geometry.location,
               animation: google.maps.Animation.DROP
+              // html: '<div>' +
+              //       '<strong>' + place.name + '</strong><br>' +
+              //       'Rating: ' + place.rating + '<br>' +
+              //       place.vicinity + '</div>'
             });
+            // google.maps.event.addListener(marker, 'click', function() {
+            //   infowindow.setContent('<div><strong>' + place.name + '</strong><br>');
+            //     infowindow.open(map, marker);
+            //   });
+            // })
           }
         }
       });
   });
-}
+
+  var barList = function(place){
+    console.log(place);
+    console.log(place.name);
+    console.log(place.vicinity);
+    console.log(place.rating);
+    console.log(place.price_level);
+    var barDiv = $('<div class="single-bar-profile"></div>');
+    $('#bar-info').append(barDiv);
+
+    barDiv.append('<h4>' + place.name + '</h4>');
+    //barDiv.append('<img src=' '></img>')
+  }
+
+} //end of init function
 // });
