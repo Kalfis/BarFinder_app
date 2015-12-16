@@ -1,7 +1,7 @@
 //angular.module('meanMapApp', ['geolocation'])
 'use strict'
   var map;
-
+  var marker;
   var currentLatitude;
   var currentLongitude;
 
@@ -20,13 +20,14 @@ function initMap() {
         currentLongitude = pos.coords.longitude;
           //console.log(currentLongitude);
 map = new google.maps.Map(document.getElementById('map'), mapOptions(currentLatitude, currentLongitude));
-        function createMarker(place) {
-          var placeloc = place.geometry.location;
-          var marker = new google.maps.Marker({
-            map: map,
-            position: place.geometry.location
-          })
-        }
+          console.log('before create marker')
+        var userPos = {lat: currentLatitude, lng: currentLongitude};
+        console.log(userPos);
+        var marker = new google.maps.Marker ({
+          position: userPos,
+          map: map,
+          animation: google.maps.Animation.DROP
+        });
         }
       navigator.geolocation.getCurrentPosition(success);
     };
@@ -94,11 +95,12 @@ $('#barClick').click(function() {
       var service = new google.maps.places.PlacesService(map);
       console.log(service);
       service.nearbySearch(request, function(results, status) {
+        console.log('in nearby search')
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
             var place = results[i];
             console.log(results[i]);
-            var marker = new google.maps.Marker({
+            marker = new google.maps.Marker({
               map: map,
               position: place.geometry.location
             });
