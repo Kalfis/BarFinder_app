@@ -2,7 +2,7 @@ angular.module('meanMapApp', ['geolocation'])
 'use strict'
   var map;
   var marker;
-  var allMarkers;
+  
   var infowindow = null;
   var currentLatitude;
   var currentLongitude;
@@ -109,7 +109,10 @@ $('#barClick').click(function() {
               map: map,
               position: place.geometry.location,
               animation: google.maps.Animation.DROP,
-              html: '<div><strong>' + place.name + '</strong></div>'
+              html: '<div>' +
+              '<h5>' + place.name + '</h5>' +
+              '<h6>OPEN NOW!</h6>' +
+              '</div>'
             });
             google.maps.event.addListener(marker, 'click', function() {
               infowindow.setContent(this.html);
@@ -122,6 +125,7 @@ $('#barClick').click(function() {
   });
 
   var barList = function(place){
+    console.log(place)
     //display the nearby open bars in the side panel
     var barDiv = $('<div class="single-bar-profile"></div>');
     $('#bar-info').append(barDiv);
