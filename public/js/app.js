@@ -107,7 +107,7 @@ $('#barClick').click(function() {
             marker = new google.maps.Marker({
               map: map,
               position: place.geometry.location,
-              animation: google.maps.Animation.DROP
+              animation: google.maps.Animation.BOUNCE
 
               // html: '<div>' +
               //       '<strong>' + place.name + '</strong><br>' +
@@ -123,7 +123,7 @@ $('#barClick').click(function() {
         }
       });
   });
-
+console.log(place)
   var barList = function(place){
     //display the nearby open bars in the side panel
     var barDiv = $('<div class="single-bar-profile"></div>');
