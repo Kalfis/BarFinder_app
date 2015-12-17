@@ -1,9 +1,9 @@
 <!doctype html>
 <!-- Declares meanMapApp as the starting Angular module -->
-<html class="no-js" >
+<html class="no-js" ng-app="meanMapApp">
 <head>
     <meta charset="utf-8">
-    <title>Scotch MEAN Map</title>
+    <title>Bar Finder App</title>
     <meta name="description" content="An example demonstrating Google Map integration with MEAN Apps">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSS -->
@@ -21,7 +21,7 @@
 <div class="container">
     <div class="header">
 
-        <h3 class="text-muted">BarFinderApp</h3>
+        <h3 class="text-muted"><img src="http://www.sherv.net/cm/emoticons/party/chugger-smiley-emoticon.gif" alt="" /> BarFinder or Where to get wasted?</h3>
     </div>
     <!-- Map and Side Panel -->
     <div class="row content">
@@ -35,11 +35,11 @@
             <div class="panel panel-default">
                 <!-- Panel Title -->
                 <div class="panel-heading">
-                    <h2 class="panel-title text-center">BarFinder <span class="glyphicon glyphicon-map-marker"></span></h2>
+                    <h2 class="panel-title text-center">Let's find something nearby.. <span class="glyphicon glyphicon-map-marker"></span></h2>
                 </div>
                 <!-- Panel Body -->
                 <div class="panel-body">
-                    <button type="submit" id="barClick" class="btn btn-danger btn-block" ng-disabled="addForm.$invalid">Local Bar Search</button>
+                    <button type="submit" id="barClick" class="btn btn-danger btn-block" ng-disabled="addForm.$invalid">PRESS THE BAR FOR BARS BRAH!</button>
                     <div id="bar-info">
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-//angular.module('meanMapApp', ['geolocation'])
+angular.module('meanMapApp', ['geolocation'])
 'use strict'
   var map;
   var marker;
@@ -89,10 +89,10 @@ $('#barClick').click(function() {
         location: userPos,
         radius: '400',
         types: ['bar'],
-        opennow: true
+        openNow: true
       }
 //console.log(request);
-      var infowindow = new google.maps.InfoWindow();
+      //var infowindow = new google.maps.InfoWindow();
       var service = new google.maps.places.PlacesService(map);
       //console.log(service);
       service.nearbySearch(request, function(results, status) {
@@ -103,11 +103,12 @@ $('#barClick').click(function() {
             var place = results[i];
             //console.log(place);
             barList(place);
-            // $.each(results[i], function() {
+            //$.each(results[i], function() {
             marker = new google.maps.Marker({
               map: map,
               position: place.geometry.location,
               animation: google.maps.Animation.DROP
+
               // html: '<div>' +
               //       '<strong>' + place.name + '</strong><br>' +
               //       'Rating: ' + place.rating + '<br>' +
@@ -124,11 +125,7 @@ $('#barClick').click(function() {
   });
 
   var barList = function(place){
-    console.log(place);
-    console.log(place.name);
-    console.log(place.vicinity);
-    console.log(place.rating);
-    console.log(place.price_level);
+    //display the nearby open bars in the side panel
     var barDiv = $('<div class="single-bar-profile"></div>');
     $('#bar-info').append(barDiv);
 
