@@ -2,7 +2,8 @@ angular.module('meanMapApp', ['geolocation'])
 'use strict'
   var map;
   var marker;
-  //var allMarkers;
+  
+  var infowindow = null;
   var currentLatitude;
   var currentLongitude;
 
@@ -92,7 +93,7 @@ $('#barClick').click(function() {
         openNow: true
       }
 //console.log(request);
-      //var infowindow = new google.maps.InfoWindow();
+      var infowindow = new google.maps.InfoWindow();
       var service = new google.maps.places.PlacesService(map);
       //console.log(service);
       service.nearbySearch(request, function(results, status) {
@@ -103,28 +104,28 @@ $('#barClick').click(function() {
             var place = results[i];
             //console.log(place);
             barList(place);
-            //$.each(results[i], function() {
+
             marker = new google.maps.Marker({
               map: map,
               position: place.geometry.location,
-              animation: google.maps.Animation.BOUNCE
-
-              // html: '<div>' +
-              //       '<strong>' + place.name + '</strong><br>' +
-              //       'Rating: ' + place.rating + '<br>' +
-              //       place.vicinity + '</div>'
+              animation: google.maps.Animation.DROP,
+              html: '<div>' +
+              '<h5>' + place.name + '</h5>' +
+              '<h6>OPEN NOW!</h6>' +
+              '</div>'
             });
-            // google.maps.event.addListener(marker, 'click', function() {
-            //   infowindow.setContent('<div><strong>' + place.name + '</strong><br>');
-            //     infowindow.open(map, marker);
-            //   });
-            // })
+            google.maps.event.addListener(marker, 'click', function() {
+              infowindow.setContent(this.html);
+                infowindow.open(map, this);
+              });
+
           }
         }
       });
   });
 
   var barList = function(place){
+    console.log(place)
     //display the nearby open bars in the side panel
     var barDiv = $('<div class="single-bar-profile"></div>');
     $('#bar-info').append(barDiv);
