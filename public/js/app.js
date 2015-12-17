@@ -123,7 +123,7 @@ $('#barClick').click(function() {
         }
       });
   });
-console.log(place)
+
   var barList = function(place){
     //display the nearby open bars in the side panel
     var barDiv = $('<div class="single-bar-profile"></div>');
